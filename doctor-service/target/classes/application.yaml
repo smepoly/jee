@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: doctor-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/doctor_db?useSSL=false&serverTimezone=UTC
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+server:
+  port: 8086
+  servlet:
+    context-path: /
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
