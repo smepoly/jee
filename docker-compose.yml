@@ -1,0 +1,127 @@
+version: '3.8'
+services:
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - jee-network
+    restart: unless-stopped
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka-server
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    networks:
+      - jee-network
+    restart: unless-stopped
+
+  doctor-service:
+    build: ./doctor-service
+    container_name: doctor-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://doctor-mysql:3306/doctor_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    ports:
+      - "8086:8086"
+    depends_on:
+      - eureka-server
+    networks:
+      - jee-network
+    restart: unless-stopped
+
+  patient-service:
+    build: ./patient-service
+    container_name: patient-service
+    environment:
+      - SPRING_APPLICATION_NAME=patient-service
+      - SPRING_DATASOURCE_URL=jdbc:mysql://patient-mysql:3306/patient_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=pass123
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    ports:
+      - "8085:8085"
+    depends_on:
+      - eureka-server
+      - patient-mysql
+    networks:
+      - jee-network
+    restart: unless-stopped
+
+  appointment-service:
+    build: ./appointment-service
+    container_name: appointment-service
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://appointment-mysql:3306/appointment_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
+    ports:
+      - "8087:8087"
+    depends_on:
+      - eureka-server
+      - appointment-mysql
+    networks:
+      - jee-network
+    restart: unless-stopped
+
+  patient-mysql:
+    image: mysql:8.0
+    container_name: patient-mysql
+    environment:
+      MYSQL_DATABASE: patient_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass123
+      MYSQL_ROOT_PASSWORD: rootpass
+    ports:
+      - "3307:3306"
+    volumes:
+      - patient-db-data:/var/lib/mysql
+    networks:
+      - jee-network
+    restart: unless-stopped
+
+  appointment-mysql:
+    image: mysql:8.0
+    container_name: appointment-mysql
+    environment:
+      MYSQL_DATABASE: appointment_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3308:3306"
+    volumes:
+      - appointment-db-data:/var/lib/mysql
+    networks:
+      - jee-network
+    restart: unless-stopped
+
+  doctor-mysql:
+    image: mysql:8.0
+    container_name: doctor-mysql
+    environment:
+      MYSQL_DATABASE: doctor_db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3309:3306"
+    volumes:
+      - doctor-db-data:/var/lib/mysql
+    networks:
+      - jee-network
+    restart: unless-stopped
+
+volumes:
+  patient-db-data:
+  appointment-db-data:
+  doctor-db-data:
+
+networks:
+  jee-network:
+    driver: bridge

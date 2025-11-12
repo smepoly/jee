@@ -1,0 +1,9 @@
+com\myhospital\appointment_service\feign\PatientClient.class
+com\myhospital\appointment_service\feign\PatientClient$PatientResponse.class
+com\myhospital\appointment_service\repository\AppointmentRepository.class
+com\myhospital\appointment_service\feign\DoctorClient$DoctorResponse.class
+com\myhospital\appointment_service\feign\DoctorClient.class
+com\myhospital\appointment_service\AppointmentServiceApplication.class
+com\myhospital\appointment_service\Controller\AppointmentController.class
+com\myhospital\appointment_service\service\AppointmentService.class
+com\myhospital\appointment_service\model\Appointment.class

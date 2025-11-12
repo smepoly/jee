@@ -1,0 +1,7 @@
+C:\Users\Asus\Downloads\jee\jee\appointment-service\src\main\java\com\myhospital\appointment_service\AppointmentServiceApplication.java
+C:\Users\Asus\Downloads\jee\jee\appointment-service\src\main\java\com\myhospital\appointment_service\Controller\AppointmentController.java
+C:\Users\Asus\Downloads\jee\jee\appointment-service\src\main\java\com\myhospital\appointment_service\feign\DoctorClient.java
+C:\Users\Asus\Downloads\jee\jee\appointment-service\src\main\java\com\myhospital\appointment_service\feign\PatientClient.java
+C:\Users\Asus\Downloads\jee\jee\appointment-service\src\main\java\com\myhospital\appointment_service\model\Appointment.java
+C:\Users\Asus\Downloads\jee\jee\appointment-service\src\main\java\com\myhospital\appointment_service\repository\AppointmentRepository.java
+C:\Users\Asus\Downloads\jee\jee\appointment-service\src\main\java\com\myhospital\appointment_service\service\AppointmentService.java

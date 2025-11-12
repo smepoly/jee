@@ -1,0 +1,5 @@
+com\myhospital\doctor_service\model\Doctor.class
+com\myhospital\doctor_service\service\DoctorService.class
+com\myhospital\doctor_service\controller\DoctorController.class
+com\myhospital\doctor_service\DoctorServiceApplication.class
+com\myhospital\doctor_service\repository\DoctorRepository.class
