@@ -1,0 +1,34 @@
+# ArgoCD Application manifest for GitOps deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: myhospital
+  namespace: argocd
+spec:
+  project: default
+  
+  source:
+    repoURL: https://github.com/smepoly/jee.git  # Update with your repo URL
+    targetRevision: main
+    path: helm/myhospital
+    helm:
+      valueFiles:
+        - values.yaml
+  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myhospital
+  
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

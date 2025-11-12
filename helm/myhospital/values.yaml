@@ -1,0 +1,116 @@
+# Default values for myhospital chart
+namespace: myhospital
+
+# Docker images configuration
+dockerNamespace: sabri74155
+imageTag: "6"
+
+# Eureka Server
+eurekaServer:
+  enabled: true
+  replicas: 1
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+# API Gateway
+apiGateway:
+  enabled: true
+  replicas: 2
+  serviceType: LoadBalancer
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+# Patient Service
+patientService:
+  enabled: true
+  replicas: 2
+  database:
+    enabled: true
+    name: patientdb
+    storage: 1Gi
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+# Doctor Service
+doctorService:
+  enabled: true
+  replicas: 2
+  database:
+    enabled: true
+    name: doctordb
+    storage: 1Gi
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+# Appointment Service
+appointmentService:
+  enabled: true
+  replicas: 2
+  database:
+    enabled: true
+    name: appointmentdb
+    storage: 1Gi
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+# MySQL configuration
+mysql:
+  image: mysql:8.0
+  rootPassword: root
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+
+# Eureka configuration
+eureka:
+  url: "http://eureka-server:8761/eureka"

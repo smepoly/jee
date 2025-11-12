@@ -1,0 +1,13 @@
+apiVersion: v2
+name: myhospital
+description: Helm chart for MyHospital microservices
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - microservices
+  - spring-boot
+  - hospital
+maintainers:
+  - name: sabri mejri
+    email: sabri@example.com

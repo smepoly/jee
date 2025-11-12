@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eureka-config
+  namespace: {{ .Values.namespace }}
+data:
+  EUREKA_SERVER_URL: "http://eureka-server:8761/eureka"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: patient-db-config
+  namespace: {{ .Values.namespace }}
+data:
+  DB_HOST: "patient-mysql"
+  DB_PORT: "3306"
+  DB_NAME: "{{ .Values.patientService.database.name }}"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: doctor-db-config
+  namespace: {{ .Values.namespace }}
+data:
+  DB_HOST: "doctor-mysql"
+  DB_PORT: "3306"
+  DB_NAME: "{{ .Values.doctorService.database.name }}"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: appointment-db-config
+  namespace: {{ .Values.namespace }}
+data:
+  DB_HOST: "appointment-mysql"
+  DB_PORT: "3306"
+  DB_NAME: "{{ .Values.appointmentService.database.name }}"
